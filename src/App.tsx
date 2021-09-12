@@ -1,9 +1,14 @@
 import React from "react";
-import "./App.css";
+import { Container } from "./pages/dashboard/styles";
+import Dashboard from "./pages/dashboard/index";
+import GlobalStyle from "./styles/global";
 
 const App: React.FC = () => (
   <>
-    <h1>Teste</h1>
+    <GlobalStyle />
+    <Container>
+      <Dashboard />
+    </Container>
   </>
 );
 
