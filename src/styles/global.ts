@@ -55,7 +55,8 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #1d1f21;
+    /* background-color: #1d1f21; */
+    background-color: #040404;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.6);
     border-radius: .25rem;
