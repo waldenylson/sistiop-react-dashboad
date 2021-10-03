@@ -3,6 +3,7 @@ import api from "../../services/api.service";
 
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { parse } from "date-fns";
 
 interface IDadosEscalaResources {
   escalado: string;
@@ -26,17 +27,26 @@ const WarningCard: React.FC = () => {
     "SOBREAVISO DA TISI",
     "SOBREAVISO DE REDES (TTIR)",
     "SOBREAVISO TÉCNICO AO RADAR",
-    "TÉCNICO DE DIA À KM",
-    "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
-    "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
+    // "TÉCNICO DE DIA À KM",
+    // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
+    // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
   ];
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
       api.get("/api/getSobreaviso").then((response) => {
-        // console.log(response.data);
-        // console.log(response.data[3].dadosEscalaResources);
-        setSobreaviso(response.data);
+        const responseData: ISobreaviso[] = response.data;
+
+        const filteredData = responseData?.filter((item) =>
+          escalas.includes(item.nome)
+        );
+
+        filteredData.splice(0, 0, filteredData[1]);
+        filteredData.splice(2, 1);
+
+        console.log(filteredData);
+
+        setSobreaviso(filteredData);
       });
 
       setLoading(false);
@@ -45,24 +55,41 @@ const WarningCard: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  /**
+   * Verifica o sobreaviso da TIOp, visto que a virada ocorre somente
+   * a partir das 08:00h
+   *
+   * @param hora Hora servidor
+   * @returns boolean baseado na hora quando entre 00:00h and 07:59h
+   */
+  function sobreavisoTiop(hora: number): boolean {
+    if (hora >= 0 && hora < 8) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Verifica o cadastro da agenda no campo ramal do SQUAMIS
+   *
+   * @param agenda Numero agenda SQUAMIS
+   * @returns Agenda ou Não Cadastrado (N/C)
+   */
+  function parseAgenda(agenda: any) {
+    if (!agenda) {
+      return "N/C";
+    }
+
+    return agenda;
+  }
+
   // React.useEffect(() => {
   //   const interval = setInterval(() => {
   //     console.log("This will run every second!");
   //   }, 1000);
   //   return () => clearInterval(interval);
   // }, []);
-
-  const escalaExibidas = sobreaviso?.filter((item) =>
-    escalas.includes(item.nome)
-  );
-
-  escalaExibidas?.map((item) =>
-    item.dadosEscalaResources[1].escalado.replace(" - CINDACTA III", "")
-  );
-
-  escalaExibidas?.splice(-3);
-
-  console.log(escalaExibidas);
 
   return (
     <>
@@ -77,14 +104,17 @@ const WarningCard: React.FC = () => {
         </div>
 
         <div className="card-body">
-          {escalaExibidas?.map((item) => (
+          {sobreaviso?.map((item, index) => (
             <p className="card-text-content">
-              {item.dadosEscalaResources[1].escalado.replace(
-                " - CINDACTA III",
-                "" + (item.dadosEscalaResources[1].ramal === null)
-                  ? ""
-                  : item.dadosEscalaResources[1].ramal
-              )}
+              {sobreavisoTiop(new Date().getHours()) && index === 0
+                ? item.dadosEscalaResources[0].escalado.slice(0, -15) +
+                  " (" +
+                  parseAgenda(item.dadosEscalaResources[0].ramal) +
+                  ")"
+                : item.dadosEscalaResources[1].escalado.slice(0, -15) +
+                  " (" +
+                  parseAgenda(item.dadosEscalaResources[1].ramal) +
+                  ")"}
             </p>
           ))}
         </div>
