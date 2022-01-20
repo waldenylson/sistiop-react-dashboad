@@ -39,11 +39,11 @@ const SystemInfoCard: React.FC = () => {
           <h3>
             <b>
               <FontAwesomeIcon icon={faDesktop} />
-              &nbsp;SISTEMAS
+              &nbsp; SISTEMAS
             </b>
           </h3>
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ fontSize: 15 }}>
           <p>
             <span className="badge bg-dark span-badge-name-titles">ACC-RE</span>
             <div className="box box-bg-color">

@@ -98,14 +98,14 @@ const WarningCard: React.FC = () => {
           <h3>
             <b>
               <FontAwesomeIcon icon={faBell} />
-              &nbsp;SOBREAVISO TÉCNICO
+              &nbsp; SOBREAVISO TÉCNICO
             </b>
           </h3>
         </div>
 
         <div className="card-body">
           {sobreaviso?.map((item, index) => (
-            <p className="card-text-content">
+            <p className="card-text-content" style={{ fontSize: 25 }}>
               {sobreavisoTiop(new Date().getHours()) && index === 0
                 ? item.dadosEscalaResources[0].escalado.slice(0, -15) +
                   " (" +

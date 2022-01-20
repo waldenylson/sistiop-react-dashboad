@@ -3,7 +3,9 @@ import React from "react";
 import { faCogs } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const MaintenanceCard: React.FC = () => {
+import MaintenanceCard from "./MaintenanceCard";
+
+const Maintenance: React.FC = () => {
   return (
     <>
       <div className="card border-dark mb-3 center">
@@ -11,18 +13,18 @@ const MaintenanceCard: React.FC = () => {
           <h3>
             <b>
               <FontAwesomeIcon icon={faCogs} />
-              &nbsp;MANUTENÇÕES PROGRAMADAS
+              &nbsp; MANUTENÇÕES PROGRAMADAS
             </b>
           </h3>
         </div>
         <div className="card-body">
-          <p className="card-text-content">
-            <b></b>
-          </p>
+          <MaintenanceCard />
+          <MaintenanceCard />
+          <p className="card-text-content"></p>
         </div>
       </div>
     </>
   );
 };
 
-export default MaintenanceCard;
+export default Maintenance;
