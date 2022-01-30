@@ -3,7 +3,7 @@ import React from 'react';
 // import { Container } from './styles';
 import { Container } from './styles';
 
-const MaintenanceCard: React.FC = () => {
+const MaintenanceCardNow: React.FC = () => {
   return (
     <>
       <Container>
@@ -56,4 +56,4 @@ const MaintenanceCard: React.FC = () => {
   );
 };
 
-export default MaintenanceCard;
+export default MaintenanceCardNow;

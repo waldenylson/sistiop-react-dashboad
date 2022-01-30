@@ -19,12 +19,14 @@ const Maintenance: React.FC = () => {
         </div>
         <div
           className="card-body mnt-card"
-          // style={{
-          //   display: 'flex',
-          //   flexDirection: 'row',
-          //   alignItems: 'center',
-          //   justifyContent: 'center',
-          // }}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 10,
+            border: '1px solid red',
+          }}
         >
           <MaintenanceCard />
           <MaintenanceCard />
