@@ -1,9 +1,10 @@
-import React from "react";
-import api from "../../services/api.service";
+import React from 'react';
 
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { parse } from "date-fns";
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { parse } from 'date-fns';
+
+import api from '../../services/api.service';
 
 interface IDadosEscalaResources {
   escalado: string;
@@ -22,11 +23,11 @@ const WarningCard: React.FC = () => {
   const [loading, setLoading] = React.useState(true);
 
   const escalas = [
-    "SOBREAVISO DA TIAD",
-    "SOBREAVISO DA TIOP",
-    "SOBREAVISO DA TISI",
-    "SOBREAVISO DE REDES (TTIR)",
-    "SOBREAVISO TÉCNICO AO RADAR",
+    'SOBREAVISO DA TIAD',
+    'SOBREAVISO DA TIOP',
+    'SOBREAVISO DA TISI',
+    'SOBREAVISO DE REDES (TTIR)',
+    'SOBREAVISO TÉCNICO AO RADAR',
     // "TÉCNICO DE DIA À KM",
     // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
@@ -34,11 +35,11 @@ const WarningCard: React.FC = () => {
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      api.get("/api/getSobreaviso").then((response) => {
+      api.get('/api/getSobreaviso').then(response => {
         const responseData: ISobreaviso[] = response.data;
 
-        const filteredData = responseData?.filter((item) =>
-          escalas.includes(item.nome)
+        const filteredData = responseData?.filter(item =>
+          escalas.includes(item.nome),
         );
 
         filteredData.splice(0, 0, filteredData[1]);
@@ -78,7 +79,7 @@ const WarningCard: React.FC = () => {
    */
   function parseAgenda(agenda: any) {
     if (!agenda) {
-      return "N/C";
+      return 'N/C';
     }
 
     return agenda;
@@ -107,14 +108,14 @@ const WarningCard: React.FC = () => {
           {sobreaviso?.map((item, index) => (
             <p className="card-text-content" style={{ fontSize: 25 }}>
               {sobreavisoTiop(new Date().getHours()) && index === 0
-                ? item.dadosEscalaResources[0].escalado.slice(0, -15) +
-                  " (" +
-                  parseAgenda(item.dadosEscalaResources[0].ramal) +
-                  ")"
-                : item.dadosEscalaResources[1].escalado.slice(0, -15) +
-                  " (" +
-                  parseAgenda(item.dadosEscalaResources[1].ramal) +
-                  ")"}
+                ? `${item.dadosEscalaResources[0].escalado.slice(
+                    0,
+                    -15,
+                  )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
+                : `${item.dadosEscalaResources[1].escalado.slice(
+                    0,
+                    -15,
+                  )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`}
             </p>
           ))}
         </div>

@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { faCogs } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import MaintenanceCard from "./MaintenanceCard";
+import MaintenanceCard from './MaintenanceCard/index';
 
 const Maintenance: React.FC = () => {
   return (
@@ -17,10 +17,17 @@ const Maintenance: React.FC = () => {
             </b>
           </h3>
         </div>
-        <div className="card-body">
+        <div
+          className="card-body mnt-card"
+          // style={{
+          //   display: 'flex',
+          //   flexDirection: 'row',
+          //   alignItems: 'center',
+          //   justifyContent: 'center',
+          // }}
+        >
           <MaintenanceCard />
           <MaintenanceCard />
-          <p className="card-text-content"></p>
         </div>
       </div>
     </>

@@ -1,6 +1,4 @@
-import React from "react";
-
-import api from "../../services/api.service";
+import React from 'react';
 
 import {
   faDesktop,
@@ -8,11 +6,13 @@ import {
   faInfoCircle,
   faCalendar,
   faDatabase,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
-import { format } from "date-fns";
+import { format } from 'date-fns';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import api from '../../services/api.service';
 
 interface IInfSistemas {
   sistema: string;
@@ -27,7 +27,7 @@ const SystemInfoCard: React.FC = () => {
   const [infSis, setInfSis] = React.useState<IInfSistemas[] | []>();
 
   React.useEffect(() => {
-    api.get("/api/getInfSis").then((response) => {
+    api.get('/api/getInfSis').then(response => {
       setInfSis(response.data);
     });
   }, []);
@@ -51,7 +51,7 @@ const SystemInfoCard: React.FC = () => {
               <i>
                 &nbsp;STM:
                 <b>
-                  <i> {infSis?.length ? infSis[0].sistema : ""}</i>
+                  <i> {infSis?.length ? infSis[0].sistema : ''}</i>
                 </b>
               </i>
               <br />
@@ -60,7 +60,7 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;VER:
                 <b>
                   <span className="less-font">
-                    {infSis?.length ? infSis[0].versao : ""}
+                    {infSis?.length ? infSis[0].versao : ''}
                   </span>
                 </b>
               </i>
@@ -70,15 +70,15 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[0].dt_sistema), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[0].dt_sistema), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faDatabase} />
               <i>
                 &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[0].v_bds : ""}</b>
+                <b>{infSis?.length ? infSis[0].v_bds : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
@@ -86,8 +86,8 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[0].dt_bds), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[0].dt_bds), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
             </div>
@@ -97,14 +97,14 @@ const SystemInfoCard: React.FC = () => {
               <i>
                 &nbsp;STM:
                 <b>
-                  <i>{infSis?.length ? infSis[1].sistema : ""}</i>
+                  <i>{infSis?.length ? infSis[1].sistema : ''}</i>
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faInfoCircle} />
               <i>
                 &nbsp;&nbsp;VER:
-                <b>{infSis?.length ? infSis[1].versao : ""}</b>
+                <b>{infSis?.length ? infSis[1].versao : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
@@ -112,15 +112,15 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[1].dt_sistema), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[1].dt_sistema), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faDatabase} />
               <i>
                 &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[1].v_bds : ""}</b>
+                <b>{infSis?.length ? infSis[1].v_bds : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
@@ -128,8 +128,8 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[1].dt_bds), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[1].dt_bds), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
             </div>
@@ -139,30 +139,30 @@ const SystemInfoCard: React.FC = () => {
               <i>
                 &nbsp;STM:
                 <b>
-                  <i>{infSis?.length ? infSis[2].sistema : ""}</i>
+                  <i>{infSis?.length ? infSis[2].sistema : ''}</i>
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faInfoCircle} />
               <i>
                 &nbsp;&nbsp;VER:
-                <b>{infSis?.length ? infSis[2].versao : ""}</b>
+                <b>{infSis?.length ? infSis[2].versao : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
               <i>
-                &nbsp;&nbsp;ATL:{" "}
+                &nbsp;&nbsp;ATL:{' '}
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[2].dt_sistema), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[2].dt_sistema), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faDatabase} />
               <i>
                 &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[2].v_bds : ""}</b>
+                <b>{infSis?.length ? infSis[2].v_bds : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
@@ -170,8 +170,8 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[2].dt_bds), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[2].dt_bds), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
             </div>
@@ -181,14 +181,14 @@ const SystemInfoCard: React.FC = () => {
               <i>
                 &nbsp;STM:
                 <b>
-                  <i>{infSis?.length ? infSis[3].sistema : ""}</i>
+                  <i>{infSis?.length ? infSis[3].sistema : ''}</i>
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faInfoCircle} />
               <i>
                 &nbsp;&nbsp;VER:
-                <b>{infSis?.length ? infSis[3].versao : ""}</b>
+                <b>{infSis?.length ? infSis[3].versao : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
@@ -196,15 +196,15 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[3].dt_sistema), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[3].dt_sistema), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
               <br />
               <FontAwesomeIcon icon={faDatabase} />
               <i>
                 &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[3].v_bds : ""}</b>
+                <b>{infSis?.length ? infSis[3].v_bds : ''}</b>
               </i>
               <br />
               <FontAwesomeIcon icon={faCalendar} />
@@ -212,8 +212,8 @@ const SystemInfoCard: React.FC = () => {
                 &nbsp;&nbsp;ATL:
                 <b>
                   {infSis?.length
-                    ? format(new Date(infSis[3].dt_bds), "dd/MM/yyyy")
-                    : ""}
+                    ? format(new Date(infSis[3].dt_bds), 'dd/MM/yyyy')
+                    : ''}
                 </b>
               </i>
             </div>

@@ -1,6 +1,6 @@
 // Resetar todos os estilos -------------------------------
-import { createGlobalStyle } from "styled-components";
-import "bootswatch/dist/slate/bootstrap.min.css";
+import { createGlobalStyle } from 'styled-components';
+import 'bootswatch/dist/slate/bootstrap.min.css';
 
 const GlobalStyle = createGlobalStyle`
   * {
