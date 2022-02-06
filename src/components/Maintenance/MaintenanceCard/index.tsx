@@ -8,7 +8,9 @@ const MaintenanceCard: React.FC = () => {
     <>
       <Container className="teste" style={{ margin: 2, width: '49%' }}>
         <div className="card border-dark mb-3" style={{ maxWidth: '99%' }}>
-          <div className="card-header">Header</div>
+          <div className="card-header" style={{ height: 60, fontSize: 30 }}>
+            RADAR TESTE STAR 2000
+          </div>
           <div className="card-body">
             <h4 className="card-title">Secondary card title</h4>
             <p className="card-text">

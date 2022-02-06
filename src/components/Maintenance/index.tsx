@@ -25,7 +25,6 @@ const Maintenance: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
             padding: 10,
-            border: '1px solid red',
           }}
         >
           <MaintenanceCard />
