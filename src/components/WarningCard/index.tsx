@@ -6,6 +6,8 @@ import { parse } from 'date-fns';
 
 import api from '../../services/api.service';
 
+import GenericContentLoader from '../ContentLoader';
+
 interface IDadosEscalaResources {
   escalado: string;
   ramal: string;
@@ -21,6 +23,7 @@ interface ISobreaviso {
 const WarningCard: React.FC = () => {
   const [sobreaviso, setSobreaviso] = React.useState<ISobreaviso[]>();
   const [loading, setLoading] = React.useState(true);
+  const [loadingController, setLoadingController] = React.useState(true);
 
   const escalas = [
     'SOBREAVISO DA TIAD',
@@ -34,26 +37,27 @@ const WarningCard: React.FC = () => {
   ];
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      api.get('/api/getSobreaviso').then(response => {
-        const responseData: ISobreaviso[] = response.data;
+    const interval = setInterval(() => {
+      // setLoadingController(false);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
-        const filteredData = responseData?.filter(item =>
-          escalas.includes(item.nome),
-        );
+  React.useEffect(() => {
+    api.get('/api/getSobreaviso').then(response => {
+      const responseData: ISobreaviso[] = response.data;
 
-        filteredData.splice(0, 0, filteredData[1]);
-        filteredData.splice(2, 1);
+      const filteredData = responseData?.filter(item =>
+        escalas.includes(item.nome),
+      );
 
-        console.log(filteredData);
+      filteredData.splice(0, 0, filteredData[1]);
+      filteredData.splice(2, 1);
 
-        setSobreaviso(filteredData);
-      });
+      setSobreaviso(filteredData);
+    });
 
-      setLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    console.log('aasdasd');
   }, []);
 
   /**
@@ -85,13 +89,6 @@ const WarningCard: React.FC = () => {
     return agenda;
   }
 
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log("This will run every second!");
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
   return (
     <>
       <div className="card border-dark mb-3 center">
@@ -105,19 +102,23 @@ const WarningCard: React.FC = () => {
         </div>
 
         <div className="card-body">
-          {sobreaviso?.map((item, index) => (
-            <p className="card-text-content" style={{ fontSize: 25 }}>
-              {sobreavisoTiop(new Date().getHours()) && index === 0
-                ? `${item.dadosEscalaResources[0].escalado.slice(
-                    0,
-                    -15,
-                  )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
-                : `${item.dadosEscalaResources[1].escalado.slice(
-                    0,
-                    -15,
-                  )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`}
-            </p>
-          ))}
+          {loading ? (
+            <GenericContentLoader />
+          ) : (
+            sobreaviso?.map((item, index) => (
+              <p className="card-text-content" style={{ fontSize: 25 }}>
+                {sobreavisoTiop(new Date().getHours()) && index === 0
+                  ? `${item.dadosEscalaResources[0].escalado.slice(
+                      0,
+                      -15,
+                    )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
+                  : `${item.dadosEscalaResources[1].escalado.slice(
+                      0,
+                      -15,
+                    )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`}
+              </p>
+            ))
+          )}
         </div>
       </div>
     </>
