@@ -6,7 +6,7 @@ import { parse } from 'date-fns';
 
 import api from '../../services/api.service';
 
-import GenericContentLoader from '../ContentLoader';
+import GenericContentLoader from '../ContentLoader/Warning';
 
 interface IDadosEscalaResources {
   escalado: string;
@@ -21,7 +21,7 @@ interface ISobreaviso {
 }
 
 const WarningCard: React.FC = () => {
-  const [sobreaviso, setSobreaviso] = React.useState<ISobreaviso[]>();
+  const [sobreaviso, setSobreaviso] = React.useState<ISobreaviso[] | null>();
   const [loading, setLoading] = React.useState(true);
   const [loadingController, setLoadingController] = React.useState(true);
 
@@ -36,28 +36,34 @@ const WarningCard: React.FC = () => {
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
   ];
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      // setLoadingController(false);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
+  // React.useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     // setLoadingController(false);
+  //   }, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   React.useEffect(() => {
-    api.get('/api/getSobreaviso').then(response => {
-      const responseData: ISobreaviso[] = response.data;
+    try {
+      api.get('/api/getSobreaviso').then(response => {
+        const responseData: ISobreaviso[] = response.data;
 
-      const filteredData = responseData?.filter(item =>
-        escalas.includes(item.nome),
-      );
+        const filteredData = responseData?.filter(item =>
+          escalas.includes(item.nome),
+        );
 
-      filteredData.splice(0, 0, filteredData[1]);
-      filteredData.splice(2, 1);
+        filteredData.splice(0, 0, filteredData[1]);
+        filteredData.splice(2, 1);
 
-      setSobreaviso(filteredData);
-    });
+        setSobreaviso(filteredData);
+      });
+    } finally {
+      if (sobreaviso !== null && sobreaviso?.length) {
+        setLoading(false);
+      }
+    }
 
-    console.log('aasdasd');
+    // console.log('aasdasd');
   }, []);
 
   /**
@@ -81,7 +87,7 @@ const WarningCard: React.FC = () => {
    * @param agenda Numero agenda SQUAMIS
    * @returns Agenda ou Não Cadastrado (N/C)
    */
-  function parseAgenda(agenda: any) {
+  function parseAgenda(agenda: string) {
     if (!agenda) {
       return 'N/C';
     }
