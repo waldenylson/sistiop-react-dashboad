@@ -28,7 +28,7 @@ const Maintenance: React.FC = () => {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 10,
+            height: '1000px',
           }}
         >
           {loading ? (

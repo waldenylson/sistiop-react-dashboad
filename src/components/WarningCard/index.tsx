@@ -44,25 +44,28 @@ const WarningCard: React.FC = () => {
   // }, []);
 
   React.useEffect(() => {
-    try {
-      api.get('/api/getSobreaviso').then(response => {
-        const responseData: ISobreaviso[] = response.data;
+    const interval = setInterval(() => {
+      try {
+        setLoading(true);
+        api.get('/api/getSobreaviso').then(response => {
+          const responseData: ISobreaviso[] = response.data;
 
-        const filteredData = responseData?.filter(item =>
-          escalas.includes(item.nome),
-        );
+          const filteredData = responseData?.filter(item =>
+            escalas.includes(item.nome),
+          );
 
-        filteredData.splice(0, 0, filteredData[1]);
-        filteredData.splice(2, 1);
+          filteredData.splice(0, 0, filteredData[1]);
+          filteredData.splice(2, 1);
 
-        setSobreaviso(filteredData);
-      });
-    } finally {
-      if (sobreaviso !== null && sobreaviso?.length) {
-        setLoading(false);
+          setSobreaviso(filteredData);
+        });
+      } finally {
+        if (sobreaviso !== null) {
+          setLoading(false);
+        }
       }
-    }
-
+    }, 5000);
+    return () => clearInterval(interval);
     // console.log('aasdasd');
   }, []);
 
