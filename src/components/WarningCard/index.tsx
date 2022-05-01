@@ -26,6 +26,7 @@ const WarningCard: React.FC = () => {
   const [loadingController, setLoadingController] = React.useState(true);
 
   const escalas = [
+    // 'OFICIAL DE SOBREAVISO TÉCNICO',
     'SOBREAVISO DA TIAD',
     'SOBREAVISO DA TIOP',
     'SOBREAVISO DA TISI',
@@ -36,38 +37,37 @@ const WarningCard: React.FC = () => {
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
   ];
 
-  // React.useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     // setLoadingController(false);
-  //   }, 10000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  /**
+   * Carrega animação splash de tela
+   */
+  React.useEffect(() => {
+    setLoading(true);
+    sobreavisoDataLoad();
+  }, []);
 
   React.useEffect(() => {
-    const interval = setInterval(() => {
-      try {
-        setLoading(true);
-        api.get('/api/getSobreaviso').then(response => {
-          const responseData: ISobreaviso[] = response.data;
+    setTimeout(() => {
+      sobreavisoDataLoad();
+      console.log('teste');
+    }, 60000);
+  }, [sobreaviso]);
 
-          const filteredData = responseData?.filter(item =>
-            escalas.includes(item.nome),
-          );
+  function sobreavisoDataLoad() {
+    api.get('/api/getSobreaviso').then(response => {
+      const responseData: ISobreaviso[] = response.data;
 
-          filteredData.splice(0, 0, filteredData[1]);
-          filteredData.splice(2, 1);
+      const filteredData = responseData?.filter(item =>
+        escalas.includes(item.nome),
+      );
 
-          setSobreaviso(filteredData);
-        });
-      } finally {
-        if (sobreaviso !== null) {
-          setLoading(false);
-        }
-      }
-    }, 5000);
-    return () => clearInterval(interval);
-    // console.log('aasdasd');
-  }, []);
+      filteredData.splice(0, 0, filteredData[1]);
+      filteredData.splice(2, 1);
+
+      setSobreaviso(filteredData);
+
+      setLoading(false);
+    });
+  }
 
   /**
    * Verifica o sobreaviso da TIOp, visto que a virada ocorre somente
