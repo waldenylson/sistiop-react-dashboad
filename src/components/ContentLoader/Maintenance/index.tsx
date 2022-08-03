@@ -29,11 +29,7 @@ const MaintenanceLoaderCard = (props: JSX.IntrinsicAttributes) => {
 };
 
 const MaintenanceContentLoader: React.FC = () => {
-  return (
-    <>
-      <MaintenanceLoaderCard />
-    </>
-  );
+  return <MaintenanceLoaderCard />;
 };
 
 export default MaintenanceContentLoader;

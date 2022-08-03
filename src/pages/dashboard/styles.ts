@@ -7,7 +7,9 @@ export const Container = styled.div`
 
   display: flex;
 
+  flex-direction: row;
+
   place-content: center;
 
-  /* background-color: blue; */
+  // background-color: blue;
 `;

@@ -51,18 +51,18 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
     min-width: 0;
-    word-wrap: break-word;
-    /* background-color: #1d1f21; */
     background-color: #101010;
     background-clip: border-box;
     border: 1px solid rgba(0,0,0,.6);
     border-radius: .25rem;
   }
 
+  .testeFonte {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+    font-family: sans; color: green;
+  }
 `;
 
 export default GlobalStyle;
