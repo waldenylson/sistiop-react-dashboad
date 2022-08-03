@@ -2,7 +2,6 @@ import React from 'react';
 
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { parse } from 'date-fns';
 
 import api from '../../services/api.service';
 
@@ -23,14 +22,13 @@ interface ISobreaviso {
 const WarningCard: React.FC = () => {
   const [sobreaviso, setSobreaviso] = React.useState<ISobreaviso[] | null>();
   const [loading, setLoading] = React.useState(true);
-  const [loadingController, setLoadingController] = React.useState(true);
 
   const escalas = [
     // 'OFICIAL DE SOBREAVISO TÉCNICO',
     'SOBREAVISO DA TIAD',
     'SOBREAVISO DA TIOP',
     'SOBREAVISO DA TISI',
-    'SOBREAVISO DE REDES (TTIR)',
+    // 'SOBREAVISO DE REDES (TTIR)',
     'SOBREAVISO TÉCNICO AO RADAR',
     // "TÉCNICO DE DIA À KM",
     // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
@@ -48,7 +46,7 @@ const WarningCard: React.FC = () => {
   React.useEffect(() => {
     setTimeout(() => {
       sobreavisoDataLoad();
-      console.log('teste');
+      console.log('Temporal_useEfect()');
     }, 60000);
   }, [sobreaviso]);
 
@@ -56,12 +54,22 @@ const WarningCard: React.FC = () => {
     api.get('/api/getSobreaviso').then(response => {
       const responseData: ISobreaviso[] = response.data;
 
-      const filteredData = responseData?.filter(item =>
+      const filteredData = responseData?.filter((item, index) =>
         escalas.includes(item.nome),
       );
 
       filteredData.splice(0, 0, filteredData[1]);
       filteredData.splice(2, 1);
+
+      // filteredData.splice(
+      //   filteredData.findIndex(e => e.dadosEscalaResources.length > 0),
+      //   1,
+      // );
+
+      console.log(
+        filteredData.findIndex(e => e.dadosEscalaResources.length > 0),
+        ' <=> Index Number',
+      );
 
       setSobreaviso(filteredData);
 

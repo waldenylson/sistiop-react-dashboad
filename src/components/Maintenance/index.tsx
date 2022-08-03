@@ -29,13 +29,9 @@ const Maintenance: React.FC = () => {
       ) : (
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            placeContent: 'center',
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            margin: 5,
           }}
         >
           <MaintenanceCard radar="teste1" />

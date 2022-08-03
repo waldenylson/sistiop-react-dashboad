@@ -8,12 +8,6 @@ const MaintenanceCard: React.FC<Idata> = () => {
   return (
     <div
       style={{
-        display: 'flex',
-        flexDirection: 'row',
-        placeContent: 'center',
-        alignContent: 'center',
-        alignItems: 'center',
-        width: '49%',
         margin: 2,
       }}
     >
