@@ -63,6 +63,26 @@ const GlobalStyle = createGlobalStyle`
 
     font-family: sans; color: green;
   }
+  .blink {
+    width:200px;
+    height: 50px;
+    color: red;
+    padding: 15px;
+    text-align: justify;
+    line-height: 50px;
+  }
+  .span {
+    font-size: 35px; 
+    font-family: Verdana;
+    font-weight: bold;
+    color: white;
+    animation: blink 1.3s linear infinite;
+  }
+  @keyframes blink {
+    /*0%{opacity: 0;}*/
+    50%{opacity: .0;}
+    100%{opacity: 5;}
+  }
 `;
 
 export default GlobalStyle;

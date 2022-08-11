@@ -4,6 +4,7 @@ import WarningCard from '../../components/WarningCard';
 import SystemInfoCard from '../../components/SystemInfoCard';
 import MaintenanceCard from '../../components/Maintenance';
 import NotificationsCard from '../../components/NotificationsCard';
+import RPLCard from '../../components/RPLCard';
 
 const Dashboard: React.FC = () => {
   return (
@@ -40,6 +41,7 @@ const Dashboard: React.FC = () => {
         }}
       >
         <SystemInfoCard />
+        <RPLCard />
       </div>
     </>
   );

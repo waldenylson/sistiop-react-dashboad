@@ -1,13 +1,24 @@
 import styled from 'styled-components';
 
-// export const Container = styled.div`
-//   height: 100vh;
-
-//   min-width: 100px;
-
-//   display: flex;
-
-//   place-content: center;
-
-//   /* background-color: blue; */
-// `;
+export const Container = styled.div`
+  .rpl {
+    width: 275px;
+    margin-left: 5px;
+    margin-top: 25px;
+  }
+  .box-rpl {
+    height: 80px;
+    width: 270px;
+    padding-top: 5px;
+    margin-left: 1px;
+    margin-bottom: 2px;
+    margin-top: 1px;
+    font-size: 15px;
+    padding-left: 1px;
+  }
+  .box-rpl-titulo-color-red {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000;
+  }
+`;

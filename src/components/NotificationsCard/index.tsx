@@ -2,14 +2,14 @@ import React from 'react';
 
 // import { Container } from './styles';
 
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheckCircle,
+  faExclamationTriangle,
+} from '@fortawesome/free-solid-svg-icons';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import GenericContentloader from '../ContentLoader/Warning';
-
 const NotificationsCard: React.FC = () => {
-  const [loading, setLoading] = React.useState(true);
-
   return (
     <>
       <div className="card border-dark mb-3 center">
@@ -22,8 +22,23 @@ const NotificationsCard: React.FC = () => {
           </h3>
         </div>
 
-        <div className="card-body">
-          {loading ? <GenericContentloader /> : <h1>teste</h1>}
+        <div
+          className="card-body"
+          style={{
+            height: 300,
+          }}
+        >
+          <FontAwesomeIcon icon={faCheckCircle} size="10x" />
+          <p
+            style={{
+              fontFamily: 'verdana',
+              fontWeight: 'bold',
+              fontStyle: 'italic',
+              marginTop: 10,
+            }}
+          >
+            Sem novos eventos!
+          </p>
         </div>
       </div>
     </>
