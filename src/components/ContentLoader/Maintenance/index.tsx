@@ -5,7 +5,7 @@ const MaintenanceLoaderCard = (props: JSX.IntrinsicAttributes) => {
   return (
     <ContentLoader
       width={450}
-      height={300}
+      height={313}
       viewBox="0 0 700 500"
       backgroundColor="#f5f5f5"
       foregroundColor="#dbdbdb"

@@ -5,6 +5,7 @@ import SystemInfoCard from '../../components/SystemInfoCard';
 import MaintenanceCard from '../../components/Maintenance';
 import NotificationsCard from '../../components/NotificationsCard';
 import RPLCard from '../../components/RPLCard';
+import GenericDevInfo from '../../components/GenericDevInfo';
 
 const Dashboard: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Dashboard: React.FC = () => {
           margin: 2,
           alignContent: 'center',
           border: '1px solid #fff',
+          borderRadius: 5,
         }}
       >
         <WarningCard />
@@ -28,9 +30,11 @@ const Dashboard: React.FC = () => {
           border: '1px solid #fff',
           display: 'flex',
           flexDirection: 'column',
+          borderRadius: 5,
         }}
       >
         <MaintenanceCard />
+        <GenericDevInfo />
       </div>
       <div
         style={{
@@ -38,6 +42,7 @@ const Dashboard: React.FC = () => {
           margin: 2,
           alignContent: 'center',
           border: '1px solid #fff',
+          borderRadius: 5,
         }}
       >
         <SystemInfoCard />

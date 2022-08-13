@@ -13,8 +13,10 @@ export const Container = styled.div`
     margin-left: 1px;
     margin-bottom: 2px;
     margin-top: 1px;
-    font-size: 15px;
+    font-size: 17px;
     padding-left: 1px;
+    display: flex;
+    flex-direction: column;
   }
   .box-rpl-titulo-color-red {
     color: #fff;

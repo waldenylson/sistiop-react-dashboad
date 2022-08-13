@@ -35,13 +35,14 @@ const SystemInfoCard: React.FC = () => {
   return (
     <>
       <div className="teste card border-dark mb-3">
-        <div className="card-header center">
-          <h3>
-            <b>
-              <FontAwesomeIcon icon={faDesktop} />
-              &nbsp; SISTEMAS
-            </b>
-          </h3>
+        <div
+          className="card-header center"
+          style={{ height: 60, fontSize: 30 }}
+        >
+          <b>
+            <FontAwesomeIcon icon={faDesktop} />
+            &nbsp; SISTEMAS
+          </b>
         </div>
         <div className="card-body" style={{ fontSize: 15 }}>
           <p>

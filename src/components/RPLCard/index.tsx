@@ -16,40 +16,32 @@ import { Container } from './styles';
 
 const RPLCard: React.FC = () => {
   return (
-    <>
-      <div className="card border-dark mb-3 center">
-        <div className="card-header">
-          <h3>
-            <b>
-              <FontAwesomeIcon icon={faPlaneDeparture} />
-              &nbsp; RPL
-            </b>
-          </h3>
+    <Container>
+      <div className="card border-dark mb-3 center" style={{ marginTop: -7 }}>
+        <div className="card-header" style={{ height: 60, fontSize: 30 }}>
+          <FontAwesomeIcon icon={faPlaneDeparture} />
+          <b>&nbsp; RPL</b>
         </div>
+        <div className="card-body box-rpl">
+          <div>
+            <FontAwesomeIcon icon={faCheckCircle} />
+            <i>&nbsp;ATUAL:</i>
+            <b> RPL200&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+          </div>
 
-        <Container className="box-rpl">
-          <FontAwesomeIcon icon={faCheckCircle} />
-          <i>
-            &nbsp;ATUAL:
-            <b>
-              <i>RPL200</i>
-            </b>
-          </i>
-          <br />
-          <FontAwesomeIcon icon={faCalendar} />
-          <i>
-            &nbsp;ATLIZ:
+          <div>
+            <FontAwesomeIcon icon={faCalendar} />
+            <i>&nbsp;ATLIZ:</i>
             <b> 00/00/0000</b>
-          </i>
-          <br />
-          <FontAwesomeIcon icon={faExclamationCircle} />
-          <i>
-            &nbsp;VALID:
-            <b>00/00/0000</b>
-          </i>
-        </Container>
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faExclamationCircle} />
+            <i>&nbsp;VALID:</i>
+            <b> 00/00/0000</b>
+          </div>
+        </div>
       </div>
-    </>
+    </Container>
   );
 };
 

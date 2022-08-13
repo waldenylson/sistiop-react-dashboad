@@ -1,17 +1,15 @@
 import React from 'react';
 
-interface Idata {
-  radar: string;
-}
+import { IMNTdata } from '../index';
 
-const MaintenanceCard: React.FC<Idata> = () => {
+const MaintenanceCard: React.FC<IMNTdata> = (mntData: IMNTdata) => {
   return (
     <div
       style={{
         margin: 2,
       }}
     >
-      <div className="card border-dark mb-3">
+      <div className="card border-dark mb-3" style={{ height: 215 }}>
         <div className="card-header" style={{ height: 60, fontSize: 30 }}>
           RADAR TESTE STAR 2000
         </div>

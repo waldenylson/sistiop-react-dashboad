@@ -61,16 +61,6 @@ const WarningCard: React.FC = () => {
       filteredData.splice(0, 0, filteredData[1]);
       filteredData.splice(2, 1);
 
-      // filteredData.splice(
-      //   filteredData.findIndex(e => e.dadosEscalaResources.length > 0),
-      //   1,
-      // );
-
-      console.log(
-        filteredData.findIndex(e => e.dadosEscalaResources.length > 0),
-        ' <=> Index Number',
-      );
-
       setSobreaviso(filteredData);
 
       setLoading(false);
@@ -109,13 +99,11 @@ const WarningCard: React.FC = () => {
   return (
     <>
       <div className="card border-dark mb-3 center">
-        <div className="card-header">
-          <h3>
-            <b>
-              <FontAwesomeIcon icon={faBell} />
-              &nbsp; SOBREAVISO TÉCNICO
-            </b>
-          </h3>
+        <div className="card-header" style={{ height: 60, fontSize: 30 }}>
+          <b>
+            <FontAwesomeIcon icon={faBell} />
+            &nbsp; SOBREAVISO TÉCNICO
+          </b>
         </div>
 
         <div className="card-body">

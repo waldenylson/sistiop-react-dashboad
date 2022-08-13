@@ -47,7 +47,7 @@ const GlobalStyle = createGlobalStyle`
     padding: .5rem 1rem;
     margin-bottom: 0;
     background-color: #0a0a0a;
-    border-bottom: 1px solid rgba(0,0,0,.6);
+    border-bottom: 2px solid rgba(0,0,0,.6);
   }
 
   .card {
@@ -58,11 +58,6 @@ const GlobalStyle = createGlobalStyle`
     border-radius: .25rem;
   }
 
-  .testeFonte {
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
-    font-family: sans; color: green;
-  }
   .blink {
     width:200px;
     height: 50px;
