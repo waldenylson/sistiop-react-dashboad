@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MaintenanceCard from './MaintenanceCard/index';
 
 import MaintenanceContentLoader from '../ContentLoader/Maintenance';
-
-import api from '../../services/api.service';
+import { useFetch } from '../../hooks/useFetch';
 
 export interface IMNTdata {
   radarNome: string;
@@ -19,29 +18,16 @@ export interface IMNTdata {
 }
 
 const Maintenance: React.FC = () => {
-  const [loading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState<IMNTdata[] | null>([]);
+  const { data: maintenances, isFetching } =
+    useFetch<IMNTdata[]>('/api/getMntProg');
 
-  /**
-   * Carrega animação splash de tela
-   */
-  React.useEffect(() => {
-    setLoading(true);
-    mntDataLoad();
-  }, []);
+  console.log('MNT_Temporal_useEfect()', maintenances);
 
   React.useEffect(() => {
-    setTimeout(async () => {
-      await mntDataLoad();
-      console.log('MNT_Temporal_useEfect()');
+    setTimeout(() => {
+      console.log('MNT_Temporal_useEfect()', maintenances);
     }, 60000);
   }, []);
-
-  async function mntDataLoad() {
-    api.get('/api/getMntProg').then(response => {
-      setData(response.data);
-    });
-  }
 
   return (
     <div className="card border-dark mb-3 center">
@@ -52,7 +38,7 @@ const Maintenance: React.FC = () => {
         </b>
       </div>
 
-      {loading ? (
+      {isFetching ? (
         <div
           style={{
             display: 'grid',

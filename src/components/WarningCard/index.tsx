@@ -28,8 +28,9 @@ const WarningCard: React.FC = () => {
     'SOBREAVISO DA TIAD',
     'SOBREAVISO DA TIOP',
     'SOBREAVISO DA TISI',
-    // 'SOBREAVISO DE REDES (TTIR)',
+    'SOBREAVISO DE REDES (TTIR)',
     'SOBREAVISO TÉCNICO AO RADAR',
+    'SOBREAVISO DA TIMC',
     // "TÉCNICO DE DIA À KM",
     // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
@@ -55,7 +56,9 @@ const WarningCard: React.FC = () => {
       const responseData: ISobreaviso[] = response.data;
 
       const filteredData = responseData?.filter((item, index) =>
-        escalas.includes(item.nome),
+        item.dadosEscalaResources.length === 0
+          ? console.log(item.nome, 'Sem Escala!')
+          : escalas.includes(item.nome),
       );
 
       filteredData.splice(0, 0, filteredData[1]);
