@@ -12,6 +12,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@tanstack/react-query": "^4.2.3",
+    "@tanstack/react-query-devtools": "^4.2.3",
     "axios": "^0.27.2",
     "bootswatch": "^5.2.0",
     "date-fns": "^2.29.2",

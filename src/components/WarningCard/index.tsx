@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import api from '../../services/api.service';
 
 import GenericContentLoader from '../ContentLoader/Warning';
+import { useQuery } from '@tanstack/react-query';
 
 interface IDadosEscalaResources {
   escalado: string;
@@ -36,26 +37,11 @@ const WarningCard: React.FC = () => {
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
   ];
 
-  /**
-   * Carrega animação splash de tela
-   */
-  React.useEffect(() => {
-    setLoading(true);
-    sobreavisoDataLoad();
-  }, []);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      sobreavisoDataLoad();
-      console.log('Temporal_useEfect()');
-    }, 60000);
-  }, [sobreaviso]);
-
-  function sobreavisoDataLoad() {
-    api.get('/api/getSobreaviso').then(response => {
-      const responseData: ISobreaviso[] = response.data;
-
-      const filteredData = responseData?.filter((item, index) =>
+  const { data, isFetching } = useQuery(['sobreavisos'], async () => {
+      await api.get('/api/getSobreaviso').then(response => {
+        const responseData: ISobreaviso[] = response.data;
+        
+        const filteredData = responseData?.filter((item, index) =>
         item.dadosEscalaResources.length === 0
           ? console.log(item.nome, 'Sem Escala!')
           : escalas.includes(item.nome),
@@ -67,8 +53,10 @@ const WarningCard: React.FC = () => {
       setSobreaviso(filteredData);
 
       setLoading(false);
+      })
+
+      
     });
-  }
 
   /**
    * Verifica o sobreaviso da TIOp, visto que a virada ocorre somente
@@ -100,7 +88,7 @@ const WarningCard: React.FC = () => {
   }
 
   return (
-    <>
+    
       <div className="card border-dark mb-3 center">
         <div className="card-header" style={{ height: 60, fontSize: 30 }}>
           <b>
@@ -110,7 +98,7 @@ const WarningCard: React.FC = () => {
         </div>
 
         <div className="card-body">
-          {loading ? (
+          {isFetching ? (
             <GenericContentLoader />
           ) : (
             sobreaviso?.map((item, index) => (
@@ -129,7 +117,7 @@ const WarningCard: React.FC = () => {
           )}
         </div>
       </div>
-    </>
+    
   );
 };
 
