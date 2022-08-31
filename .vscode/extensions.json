@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "rocketseat.rocketseatreactjs",
+        "dbaeumer.vscode-eslint",
+        "psykosoldi3r.vscode-git-flow",
+        "mhutchie.git-graph",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "vscode-icons-team.vscode-icons",
+        "ms-azuretools.vscode-docker",
+        "hangxingliu.vscode-nginx-conf-hint",
+        "mikestead.dotenv",
+        "github.vscode-pull-request-github",
+        "christian-kohler.npm-intellisense"
+    ]
+}

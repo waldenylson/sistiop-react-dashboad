@@ -38,10 +38,10 @@ const WarningCard: React.FC = () => {
   ];
 
   const { data, isFetching } = useQuery(['sobreavisos'], async () => {
-      await api.get('/api/getSobreaviso').then(response => {
-        const responseData: ISobreaviso[] = response.data;
-        
-        const filteredData = responseData?.filter((item, index) =>
+    await api.get('/api/getSobreaviso').then(response => {
+      const responseData: ISobreaviso[] = response.data;
+
+      const filteredData = responseData?.filter((item, index) =>
         item.dadosEscalaResources.length === 0
           ? console.log(item.nome, 'Sem Escala!')
           : escalas.includes(item.nome),
@@ -53,10 +53,8 @@ const WarningCard: React.FC = () => {
       setSobreaviso(filteredData);
 
       setLoading(false);
-      })
-
-      
     });
+  });
 
   /**
    * Verifica o sobreaviso da TIOp, visto que a virada ocorre somente
@@ -88,36 +86,34 @@ const WarningCard: React.FC = () => {
   }
 
   return (
-    
-      <div className="card border-dark mb-3 center">
-        <div className="card-header" style={{ height: 60, fontSize: 30 }}>
-          <b>
-            <FontAwesomeIcon icon={faBell} />
-            &nbsp; SOBREAVISO TÉCNICO
-          </b>
-        </div>
-
-        <div className="card-body">
-          {isFetching ? (
-            <GenericContentLoader />
-          ) : (
-            sobreaviso?.map((item, index) => (
-              <p className="card-text-content" style={{ fontSize: 25 }}>
-                {sobreavisoTiop(new Date().getHours()) && index === 0
-                  ? `${item.dadosEscalaResources[0].escalado.slice(
-                      0,
-                      -15,
-                    )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
-                  : `${item.dadosEscalaResources[1].escalado.slice(
-                      0,
-                      -15,
-                    )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`}
-              </p>
-            ))
-          )}
-        </div>
+    <div className="card border-dark mb-3 center">
+      <div className="card-header" style={{ height: 60, fontSize: 30 }}>
+        <b>
+          <FontAwesomeIcon icon={faBell} />
+          &nbsp; SOBREAVISO TÉCNICO
+        </b>
       </div>
-    
+
+      <div className="card-body">
+        {isFetching ? (
+          <GenericContentLoader />
+        ) : (
+          sobreaviso?.map((item, index) => (
+            <p className="card-text-content" style={{ fontSize: 25 }}>
+              {sobreavisoTiop(new Date().getHours()) && index === 0
+                ? `${item.dadosEscalaResources[0].escalado.slice(
+                    0,
+                    -15,
+                  )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
+                : `${item.dadosEscalaResources[1].escalado.slice(
+                    0,
+                    -15,
+                  )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`}
+            </p>
+          ))
+        )}
+      </div>
+    </div>
   );
 };
 
