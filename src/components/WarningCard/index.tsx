@@ -22,7 +22,6 @@ interface ISobreaviso {
 
 const WarningCard: React.FC = () => {
   const [sobreaviso, setSobreaviso] = React.useState<ISobreaviso[] | null>();
-  const [loading, setLoading] = React.useState(true);
 
   const escalas = [
     // 'OFICIAL DE SOBREAVISO TÉCNICO',
@@ -37,24 +36,28 @@ const WarningCard: React.FC = () => {
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
   ];
 
-  const { data, isFetching } = useQuery(['sobreavisos'], async () => {
-    await api.get('/api/getSobreaviso').then(response => {
-      const responseData: ISobreaviso[] = response.data;
+  const { isFetching } = useQuery(
+    ['sobreavisos'],
+    async () => {
+      await api.get('/api/getSobreaviso').then(response => {
+        const responseData: ISobreaviso[] = response.data;
+        console.log('isFetching', isFetching);
+        const filteredData = responseData?.filter((item, index) =>
+          item.dadosEscalaResources.length === 0
+            ? console.log(item.nome, 'Sem Escala!')
+            : escalas.includes(item.nome),
+        );
 
-      const filteredData = responseData?.filter((item, index) =>
-        item.dadosEscalaResources.length === 0
-          ? console.log(item.nome, 'Sem Escala!')
-          : escalas.includes(item.nome),
-      );
+        filteredData.splice(0, 0, filteredData[1]);
+        filteredData.splice(2, 1);
 
-      filteredData.splice(0, 0, filteredData[1]);
-      filteredData.splice(2, 1);
-
-      setSobreaviso(filteredData);
-
-      setLoading(false);
-    });
-  });
+        setSobreaviso(filteredData);
+      });
+    },
+    {
+      refetchInterval: 6000,
+    },
+  );
 
   /**
    * Verifica o sobreaviso da TIOp, visto que a virada ocorre somente
@@ -94,8 +97,8 @@ const WarningCard: React.FC = () => {
         </b>
       </div>
 
-      <div className="card-body">
-        {isFetching ? (
+      <div className="card-body" style={{ height: 350 }}>
+        {isFetching && !sobreaviso ? (
           <GenericContentLoader />
         ) : (
           sobreaviso?.map((item, index) => (
