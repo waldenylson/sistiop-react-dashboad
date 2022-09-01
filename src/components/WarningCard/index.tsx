@@ -55,7 +55,7 @@ const WarningCard: React.FC = () => {
       });
     },
     {
-      refetchInterval: 6000,
+      refetchInterval: 60000, //1 minuto
     },
   );
 
