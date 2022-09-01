@@ -41,10 +41,10 @@ const WarningCard: React.FC = () => {
     async () => {
       await api.get('/api/getSobreaviso').then(response => {
         const responseData: ISobreaviso[] = response.data;
-        console.log('isFetching', isFetching);
-        const filteredData = responseData?.filter((item, index) =>
+
+        const filteredData = responseData?.filter(item =>
           item.dadosEscalaResources.length === 0
-            ? console.log(item.nome, 'Sem Escala!')
+            ? ''
             : escalas.includes(item.nome),
         );
 
