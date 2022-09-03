@@ -30,7 +30,7 @@ const WarningCard: React.FC = () => {
     'SOBREAVISO DA TISI',
     'SOBREAVISO DE REDES (TTIR)',
     'SOBREAVISO TÉCNICO AO RADAR',
-    'SOBREAVISO DA TIMC',
+    //'SOBREAVISO DA TIMC',
     // "TÉCNICO DE DIA À KM",
     // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
@@ -55,7 +55,7 @@ const WarningCard: React.FC = () => {
       });
     },
     {
-      refetchInterval: 60000, //1 minuto
+      refetchInterval: 60000 * 5, //5 minutos
     },
   );
 
@@ -102,7 +102,11 @@ const WarningCard: React.FC = () => {
           <GenericContentLoader />
         ) : (
           sobreaviso?.map((item, index) => (
-            <p className="card-text-content" style={{ fontSize: 25 }}>
+            <p
+              className="card-text-content"
+              style={{ fontSize: 25 }}
+              key={item.nome}
+            >
               {sobreavisoTiop(new Date().getHours()) && index === 0
                 ? `${item.dadosEscalaResources[0].escalado.slice(
                     0,

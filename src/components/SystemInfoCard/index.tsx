@@ -13,6 +13,9 @@ import { format } from 'date-fns';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import api from '../../services/api.service';
+import { useQuery } from '@tanstack/react-query';
+
+import { Audio } from 'react-loader-spinner';
 
 interface IInfSistemas {
   sistema: string;
@@ -26,11 +29,17 @@ interface IInfSistemas {
 const SystemInfoCard: React.FC = () => {
   const [infSis, setInfSis] = React.useState<IInfSistemas[] | []>();
 
-  React.useEffect(() => {
-    api.get('/api/getInfSis').then(response => {
-      setInfSis(response.data);
-    });
-  }, []);
+  const { isFetching } = useQuery(
+    ['InfSis'],
+    async () => {
+      await api.get('/api/getInfSis').then(response => {
+        setInfSis(response.data);
+      });
+    },
+    {
+      refetchInterval: 60000 * 5, //5 minutos
+    },
+  );
 
   return (
     <>
@@ -47,177 +56,254 @@ const SystemInfoCard: React.FC = () => {
         <div className="card-body" style={{ fontSize: 15 }}>
           <p>
             <span className="badge bg-dark span-badge-name-titles">ACC-RE</span>
-            <div className="box box-bg-color">
-              <FontAwesomeIcon icon={faCode} />
-              <i>
-                &nbsp;STM:
-                <b>
-                  <i> {infSis?.length ? infSis[0].sistema : ''}</i>
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faInfoCircle} />
-              <i>
-                &nbsp;&nbsp;VER:
-                <b>
-                  <span className="less-font">
-                    {infSis?.length ? infSis[0].versao : ''}
-                  </span>
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[0].dt_sistema), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faDatabase} />
-              <i>
-                &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[0].v_bds : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[0].dt_bds), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-            </div>
+            {isFetching && !infSis ? (
+              <div
+                style={{
+                  paddingLeft: '30%',
+                }}
+              >
+                <Audio
+                  height="100"
+                  width="100"
+                  color="#fff"
+                  ariaLabel="audio-loading"
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <div className="box box-bg-color">
+                <FontAwesomeIcon icon={faCode} />
+                <i>
+                  &nbsp;STM:
+                  <b>
+                    <i> {infSis?.length ? infSis[0].sistema : ''}</i>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faInfoCircle} />
+                <i>
+                  &nbsp;&nbsp;VER:&nbsp;
+                  <b>
+                    <span className="less-font">
+                      {infSis?.length ? infSis[0].versao : ''}
+                    </span>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[0].dt_sistema), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faDatabase} />
+                <i>
+                  &nbsp;&nbsp;BDS:&nbsp;
+                  <b>{infSis?.length ? infSis[0].v_bds : ''}</b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[0].dt_bds), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+              </div>
+            )}
+
             <span className="badge bg-dark span-badge-name-titles">ACC-AO</span>
-            <div className="box box-bg-color">
-              <FontAwesomeIcon icon={faCode} />
-              <i>
-                &nbsp;STM:
-                <b>
-                  <i>{infSis?.length ? infSis[1].sistema : ''}</i>
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faInfoCircle} />
-              <i>
-                &nbsp;&nbsp;VER:
-                <b>{infSis?.length ? infSis[1].versao : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[1].dt_sistema), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faDatabase} />
-              <i>
-                &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[1].v_bds : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[1].dt_bds), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-            </div>
+            {isFetching && !infSis ? (
+              <div
+                style={{
+                  paddingLeft: '30%',
+                }}
+              >
+                <Audio
+                  height="100"
+                  width="100"
+                  color="#fff"
+                  ariaLabel="audio-loading"
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <div className="box box-bg-color">
+                <FontAwesomeIcon icon={faCode} />
+                <i>
+                  &nbsp;STM:
+                  <b>
+                    <i> {infSis?.length ? infSis[3].sistema : ''}</i>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faInfoCircle} />
+                <i>
+                  &nbsp;&nbsp;VER:&nbsp;
+                  <b>
+                    <span className="less-font">
+                      {infSis?.length ? infSis[3].versao : ''}
+                    </span>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[3].dt_sistema), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faDatabase} />
+                <i>
+                  &nbsp;&nbsp;BDS:&nbsp;
+                  <b>{infSis?.length ? infSis[3].v_bds : ''}</b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[3].dt_bds), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+              </div>
+            )}
             <span className="badge bg-dark span-badge-name-titles">APP-RF</span>
-            <div className="box box-bg-color">
-              <FontAwesomeIcon icon={faCode} />
-              <i>
-                &nbsp;STM:
-                <b>
-                  <i>{infSis?.length ? infSis[2].sistema : ''}</i>
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faInfoCircle} />
-              <i>
-                &nbsp;&nbsp;VER:
-                <b>{infSis?.length ? infSis[2].versao : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:{' '}
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[2].dt_sistema), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faDatabase} />
-              <i>
-                &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[2].v_bds : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[2].dt_bds), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-            </div>
+            {isFetching && !infSis ? (
+              <div
+                style={{
+                  paddingLeft: '30%',
+                }}
+              >
+                <Audio
+                  height="100"
+                  width="100"
+                  color="#fff"
+                  ariaLabel="audio-loading"
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <div className="box box-bg-color">
+                <FontAwesomeIcon icon={faCode} />
+                <i>
+                  &nbsp;STM:
+                  <b>
+                    <i> {infSis?.length ? infSis[1].sistema : ''}</i>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faInfoCircle} />
+                <i>
+                  &nbsp;&nbsp;VER:&nbsp;
+                  <b>
+                    <span className="less-font">
+                      {infSis?.length ? infSis[1].versao : ''}
+                    </span>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[1].dt_sistema), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faDatabase} />
+                <i>
+                  &nbsp;&nbsp;BDS:&nbsp;
+                  <b>{infSis?.length ? infSis[1].v_bds : ''}</b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[1].dt_bds), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+              </div>
+            )}
             <span className="badge bg-dark span-badge-name-titles">COPM3</span>
-            <div className="box box-bg-color">
-              <FontAwesomeIcon icon={faCode} />
-              <i>
-                &nbsp;STM:
-                <b>
-                  <i>{infSis?.length ? infSis[3].sistema : ''}</i>
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faInfoCircle} />
-              <i>
-                &nbsp;&nbsp;VER:
-                <b>{infSis?.length ? infSis[3].versao : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[3].dt_sistema), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faDatabase} />
-              <i>
-                &nbsp;&nbsp;BDS:
-                <b>{infSis?.length ? infSis[3].v_bds : ''}</b>
-              </i>
-              <br />
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>
-                &nbsp;&nbsp;ATL:
-                <b>
-                  {infSis?.length
-                    ? format(new Date(infSis[3].dt_bds), 'dd/MM/yyyy')
-                    : ''}
-                </b>
-              </i>
-            </div>
+            {isFetching && !infSis ? (
+              <div
+                style={{
+                  paddingLeft: '30%',
+                }}
+              >
+                <Audio
+                  height="100"
+                  width="100"
+                  color="#fff"
+                  ariaLabel="audio-loading"
+                  visible={true}
+                />
+              </div>
+            ) : (
+              <div className="box box-bg-color">
+                <FontAwesomeIcon icon={faCode} />
+                <i>
+                  &nbsp;STM:
+                  <b>
+                    <i> {infSis?.length ? infSis[2].sistema : ''}</i>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faInfoCircle} />
+                <i>
+                  &nbsp;&nbsp;VER:&nbsp;
+                  <b>
+                    <span className="less-font">
+                      {infSis?.length ? infSis[2].versao : ''}
+                    </span>
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[2].dt_sistema), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faDatabase} />
+                <i>
+                  &nbsp;&nbsp;BDS:&nbsp;
+                  <b>{infSis?.length ? infSis[2].v_bds : ''}</b>
+                </i>
+                <br />
+                <FontAwesomeIcon icon={faCalendar} />
+                <i>
+                  &nbsp;&nbsp;ATL:&nbsp;
+                  <b>
+                    {infSis?.length
+                      ? format(new Date(infSis[2].dt_bds), 'dd/MM/yyyy')
+                      : ''}
+                  </b>
+                </i>
+              </div>
+            )}
           </p>
         </div>
       </div>

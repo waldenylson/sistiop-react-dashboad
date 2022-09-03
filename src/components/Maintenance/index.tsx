@@ -6,9 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MaintenanceCard from './MaintenanceCard/index';
 
 import MaintenanceContentLoader from '../ContentLoader/Maintenance';
-import { useFetch } from '../../hooks/useFetch';
+import { useQuery } from '@tanstack/react-query';
+import api from '../../services/api.service';
 
 export interface IMNTdata {
+  id: number;
   radarNome: string;
   data_ini: string;
   data_fim: string;
@@ -18,16 +20,19 @@ export interface IMNTdata {
 }
 
 const Maintenance: React.FC = () => {
-  const { data: maintenances, isFetching } =
-    useFetch<IMNTdata[]>('/api/getMntProg');
+  const [mntProg, setMntProg] = React.useState<IMNTdata[] | null>();
 
-  console.log('MNT_Temporal_useEfect()', maintenances);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      console.log('MNT_Temporal_useEfect()', maintenances);
-    }, 60000);
-  }, []);
+  const { isFetching } = useQuery(
+    ['MNTProg'],
+    async () => {
+      await api.get('/api/getMntProg').then(response => {
+        setMntProg(response.data);
+      });
+    },
+    {
+      refetchInterval: 60000 * 5, //5 minutos
+    },
+  );
 
   return (
     <div className="card border-dark mb-3 center">
@@ -38,7 +43,7 @@ const Maintenance: React.FC = () => {
         </b>
       </div>
 
-      {isFetching ? (
+      {isFetching && !mntProg ? (
         <div
           style={{
             display: 'grid',
@@ -62,7 +67,9 @@ const Maintenance: React.FC = () => {
             margin: 5,
           }}
         >
-          {/* <MaintenanceCard /> */}
+          {mntProg?.map(item => (
+            <MaintenanceCard key={item.id} data={item} />
+          ))}
         </div>
       )}
     </div>
