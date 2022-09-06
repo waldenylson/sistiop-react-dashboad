@@ -39,10 +39,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: xx-large;
   }
 
-  .span-badge-name-titles {
-    width: 100%;
-  }
-
   .card-header {
     padding: .5rem 1rem;
     margin-bottom: 0;
