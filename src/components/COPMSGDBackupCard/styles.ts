@@ -1,13 +1,37 @@
 import styled from 'styled-components';
 
-// export const Container = styled.div`
-//   height: 100vh;
+export const Container = styled.div`
+  .box-dacom {
+    width: 97%;
+    margin-left: 4px;
+    font-size: 17px;
+    color: green;
+    padding-bottom: 5px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
 
-//   min-width: 100px;
+  .box-dacom-titulo-color-red {
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000;
+  }
 
-//   display: flex;
+  .box-dacom-titulo-color-yellow {
+    color: #fff;
+    background-color: #ffe623;
+    border-color: #ffe623;
+  }
 
-//   place-content: center;
+  .titulo {
+    font-size: 20px;
+    padding-bottom: -20px;
+  }
 
-//   /* background-color: blue; */
-// `;
+  .error {
+    color: red;
+  }
+`;

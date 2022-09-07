@@ -43,7 +43,7 @@ const RPLCard: React.FC = () => {
 
   return (
     <Container>
-      <div className="card border-dark mb-3 center" style={{ marginTop: -7 }}>
+      <div className="card border-dark mb-3 center" style={{ marginTop: -13 }}>
         <div
           className={
             'card-header ' + (rplAlert ? 'box-rpl-titulo-color-red' : '')
