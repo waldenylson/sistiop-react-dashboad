@@ -1,0 +1,8 @@
+# Testing dist on a "real" webserver
+production-server:
+  image: nginx:alpine
+  container_name: sandbox-preview-server
+  volumes:
+    - ./dist:/usr/share/nginx/html
+  ports:
+    - 9090:80
