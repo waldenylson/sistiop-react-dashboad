@@ -9,9 +9,11 @@ export const Container = styled.div`
   justify-content: space-between;
   text-align: center;
   height: 44px;
-  width: 99%;
+  width: 1120px;
   margin-top: -5px;
   border-radius: 6px;
+  position: fixed;
+  bottom: 4px;
 
   .rightSpace {
     margin-right: 20px;
