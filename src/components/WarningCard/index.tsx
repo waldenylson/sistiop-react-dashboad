@@ -30,7 +30,7 @@ const WarningCard: React.FC = () => {
     'SOBREAVISO DA TISI',
     'SOBREAVISO DE REDES (TTIR)',
     'SOBREAVISO TÉCNICO AO RADAR',
-    //'SOBREAVISO DA TIMC',
+    // 'SOBREAVISO DA TIMC',
     // "TÉCNICO DE DIA À KM",
     // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
@@ -112,10 +112,12 @@ const WarningCard: React.FC = () => {
                     0,
                     -15,
                   )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
-                : `${item.dadosEscalaResources[1].escalado.slice(
+                : item.dadosEscalaResources[1]
+                ? `${item.dadosEscalaResources[1].escalado.slice(
                     0,
                     -15,
-                  )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`}
+                  )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`
+                : item.nome + ' S/ Escala'}
             </p>
           ))
         )}
