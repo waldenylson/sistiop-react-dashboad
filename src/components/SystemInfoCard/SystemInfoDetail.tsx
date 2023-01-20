@@ -66,7 +66,10 @@ const SystemInfoDetail: React.FC<ISystemInfoDatail> = ({
             &nbsp;&nbsp;ATL:&nbsp;
             <b>
               {infSis?.length
-                ? format(new Date(infSis[index].dt_sistema), 'dd/MM/yyyy')
+                ? format(
+                    new Date(infSis[index].dt_sistema + 'T08:10:00'),
+                    'dd/MM/yyyy',
+                  )
                 : ''}
             </b>
           </i>
@@ -82,7 +85,10 @@ const SystemInfoDetail: React.FC<ISystemInfoDatail> = ({
             &nbsp;&nbsp;ATL:&nbsp;
             <b>
               {infSis?.length
-                ? format(new Date(infSis[index].dt_bds), 'dd/MM/yyyy')
+                ? format(
+                    new Date(infSis[index].dt_bds + 'T08:10:00'),
+                    'dd/MM/yyyy',
+                  )
                 : ''}
             </b>
           </i>

@@ -31,10 +31,13 @@ const RPLCard: React.FC = () => {
   const { isFetching } = useQuery(
     ['RPLInfo'],
     async () => {
-      await api.get('/api/getRPLInfo').then(response => {
-        setRplInfo(response.data[0]);
-        setRplAlert(response.data[1].rplAlert);
-      });
+      await api
+        .get('/api/getRPLInfo')
+        .then(response => {
+          setRplInfo(response.data[0]);
+          setRplAlert(response.data[1].rplAlert);
+        })
+        .then(() => {});
     },
     {
       refetchInterval: 60000 * 5, //5 minutos
