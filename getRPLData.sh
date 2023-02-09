@@ -7,6 +7,9 @@ RPL_PATH='sistemas/rpl'
 
 RPL_RANGE=$(curl -sk ${CGNA_PAGE}${RPL_PATH} | grep -o ${REGEX})
 
-echo ${RPL_RANGE} | awk '{ print "RPL Atual\t: " $1 " (válido até: " $2")"}'
-echo ${RPL_RANGE} | awk '{ print "RPL Anterior\t: " $3 " (válido até: " $4")"}'
+RPL_START_DATE=$(echo ${RPL_RANGE} | awk '{ print $1}')
+
+PARSED_RPL_DATE=$(echo ${RPL_START_DATE} | sed 's/\//-/g')
+
+curl -sk "http://10.80.8.54:8000/api/$PARSED_RPL_DATE/manageStatusCGNA"
 
