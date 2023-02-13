@@ -10,10 +10,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useRecoilValue } from 'recoil';
-import { RPLValidateInfo } from '../RPLCard/recoil.atom';
+import { RPLValidateInfo, RPLCGNAInfo } from '../RPLCard/recoil.atom';
 
 const NotificationsCard: React.FC = () => {
   const rplAlert = useRecoilValue(RPLValidateInfo);
+  const cgnaRPL = useRecoilValue(RPLCGNAInfo);
+
+  console.log(cgnaRPL);
 
   return (
     <div className="card border-dark mb-3 center">
@@ -30,7 +33,14 @@ const NotificationsCard: React.FC = () => {
           height: 300,
         }}
       >
-        {rplAlert ? (
+        {cgnaRPL === 1 ? (
+          <div className="box box-notification box-notification-height">
+            <span className="fa-blink">
+              RPL DISPONÍVEL no Portal do CGNA! <br /> Iniciar Tratamento no
+              SAGITARIO!
+            </span>
+          </div>
+        ) : rplAlert ? (
           <div className="box box-notification box-notification-height">
             <span className="fa-blink">
               RPL VENCENDO OU VENCIDO! <br /> Checar STATUS no SAGITARIO!

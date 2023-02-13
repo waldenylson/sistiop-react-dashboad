@@ -14,7 +14,7 @@ import { Container } from './styles';
 import { useQuery } from '@tanstack/react-query';
 
 import { useRecoilState } from 'recoil';
-import { RPLValidateInfo } from '../RPLCard/recoil.atom';
+import { RPLValidateInfo, RPLCGNAInfo } from '../RPLCard/recoil.atom';
 
 import { Radio } from 'react-loader-spinner';
 
@@ -22,11 +22,13 @@ interface IRPLInfo {
   numero: string;
   validade: string;
   dtCarga: string;
+  cgna_rpl: number;
 }
 
 const RPLCard: React.FC = () => {
   const [rplInfo, setRplInfo] = React.useState<IRPLInfo | null>();
   const [rplAlert, setRplAlert] = useRecoilState(RPLValidateInfo);
+  const [rplCGNA, setRplCGNA] = useRecoilState(RPLCGNAInfo);
 
   const { isFetching } = useQuery(
     ['RPLInfo'],
@@ -35,6 +37,7 @@ const RPLCard: React.FC = () => {
         .get('/api/getRPLInfo')
         .then(response => {
           setRplInfo(response.data[0]);
+          setRplCGNA(response.data[0].cgna_rpl);
           setRplAlert(response.data[1].rplAlert);
         })
         .then(() => {});
@@ -49,7 +52,8 @@ const RPLCard: React.FC = () => {
       <div className="card border-dark mb-3 center" style={{ marginTop: -13 }}>
         <div
           className={
-            'card-header ' + (rplAlert ? 'box-rpl-titulo-color-red' : '')
+            'card-header ' +
+            (rplAlert || rplCGNA === 1 ? 'box-rpl-titulo-color-red' : '')
           }
           style={{ height: 60, fontSize: 30 }}
         >
