@@ -13,6 +13,13 @@ export const Container = styled.div`
     font-size: 40px;
     color: red;
   }
+  .box-notification-rplCGNA {
+    height: 50%;
+    width: 99.5%;
+    text-align: center;
+    font-size: 40px;
+    color: yellow;
+  }
   .box-notification-height {
     height: 293px;
   }

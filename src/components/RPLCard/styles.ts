@@ -23,4 +23,10 @@ export const Container = styled.div`
     background-color: #ff0000;
     border-color: #ff0000;
   }
+
+  .box-rpl-titulo-color-yellow {
+    color: gray;
+    background-color: yellow;
+    border-color: yellow;
+  }
 `;

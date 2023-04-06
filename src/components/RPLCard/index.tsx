@@ -53,7 +53,11 @@ const RPLCard: React.FC = () => {
         <div
           className={
             'card-header ' +
-            (rplAlert || rplCGNA === 1 ? 'box-rpl-titulo-color-red' : '')
+            (rplAlert
+              ? 'box-rpl-titulo-color-red'
+              : rplCGNA === 1
+              ? 'box-rpl-titulo-color-yellow'
+              : '')
           }
           style={{ height: 60, fontSize: 30 }}
         >

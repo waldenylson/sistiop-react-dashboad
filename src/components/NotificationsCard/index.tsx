@@ -34,7 +34,7 @@ const NotificationsCard: React.FC = () => {
         }}
       >
         {cgnaRPL === 1 ? (
-          <div className="box box-notification box-notification-height">
+          <div className="box box-notification-rplCGNA box-notification-height">
             <span className="fa-blink">
               RPL DISPONÍVEL no Portal do CGNA! <br /> Iniciar Tratamento no
               SAGITARIO!
