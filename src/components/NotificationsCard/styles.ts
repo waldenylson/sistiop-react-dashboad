@@ -20,6 +20,15 @@ export const Container = styled.div`
     font-size: 40px;
     color: yellow;
   }
+
+  .box-notification-C-AIS {
+    height: 50%;
+    width: 99.5%;
+    text-align: center;
+    font-size: 40px;
+    color: orange;
+  }
+
   .box-notification-height {
     height: 293px;
   }

@@ -25,8 +25,14 @@ export const Container = styled.div`
   }
 
   .box-rpl-titulo-color-yellow {
-    color: gray;
+    color: fff;
     background-color: yellow;
     border-color: yellow;
+  }
+
+  .box-rpl-titulo-color-orange {
+    color: gray;
+    background-color: orange;
+    border-color: orange;
   }
 `;

@@ -40,6 +40,13 @@ const NotificationsCard: React.FC = () => {
               SAGITARIO!
             </span>
           </div>
+        ) : cgnaRPL === 2 ? (
+          <div className="box box-notification-C-AIS box-notification-height">
+            <span>
+              RPL Futuro Iniciado no SAGITARIO! <br /> Aguardando correção do
+              C-AIS!
+            </span>
+          </div>
         ) : rplAlert ? (
           <div className="box box-notification box-notification-height">
             <span className="fa-blink">
