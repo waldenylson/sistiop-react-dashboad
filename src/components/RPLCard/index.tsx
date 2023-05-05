@@ -59,6 +59,8 @@ const RPLCard: React.FC = () => {
               ? 'box-rpl-titulo-color-yellow'
               : rplCGNA === 2
               ? 'box-rpl-titulo-color-orange'
+              : rplCGNA === 3
+              ? 'box-rpl-titulo-color-lemon'
               : '')
           }
           style={{ height: 60, fontSize: 30 }}

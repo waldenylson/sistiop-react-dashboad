@@ -35,4 +35,10 @@ export const Container = styled.div`
     background-color: orange;
     border-color: orange;
   }
+
+  .box-rpl-titulo-color-lemon {
+    color: #fff;
+    background-color: #96be25;
+    border-color: #96be25;
+  }
 `;

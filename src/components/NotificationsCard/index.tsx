@@ -47,6 +47,12 @@ const NotificationsCard: React.FC = () => {
               C-AIS!
             </span>
           </div>
+        ) : cgnaRPL === 3 ? (
+          <div className="box box-notification-agendado box-notification-height">
+            <span>
+              RPL Futuro Agendado no SAGITARIO! <br />
+            </span>
+          </div>
         ) : rplAlert ? (
           <div className="box box-notification box-notification-height">
             <span className="fa-blink">

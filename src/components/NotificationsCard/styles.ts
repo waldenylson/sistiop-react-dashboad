@@ -29,6 +29,14 @@ export const Container = styled.div`
     color: orange;
   }
 
+  .box-notification-agendado {
+    height: 50%;
+    width: 99.5%;
+    text-align: center;
+    font-size: 40px;
+    color: #96be25;
+  }
+
   .box-notification-height {
     height: 293px;
   }
