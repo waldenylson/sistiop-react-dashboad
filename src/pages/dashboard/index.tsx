@@ -7,6 +7,7 @@ import NotificationsCard from '../../components/NotificationsCard';
 import RPLCard from '../../components/RPLCard';
 import GenericDevInfo from '../../components/GenericDevInfo';
 import COPMSGDBackupCard from '../../components/COPMSGDBackupCard';
+import PAPIStatusCard from '../../components/PAPIStatusCard';
 
 const Dashboard: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const Dashboard: React.FC = () => {
         }}
       >
         <WarningCard />
+        <PAPIStatusCard />
         <NotificationsCard />
       </div>
       <div
