@@ -3,8 +3,9 @@
 import requests
 from pyModbusTCP.client import ModbusClient
 import mysql.connector
+import time
 
-dados = {"brilho": "", "remoto": "", "status": "OK", "MySQL": ""}
+dados = {"brilho": "", "remoto": "", "status": "OK", "MySQL": "Falha"}
 dados_teste_papi = [False, True, False, False, False, True, True]
 
 
@@ -23,6 +24,8 @@ def mysql_check():
 
         if len(cursor.fetchall()) > 0:
             dados["MySQL"] = "OK"
+        else:
+            dados["MySQL"] = "Erro Leitura BD"
 
         cursor.close()
         conn.close()
@@ -54,7 +57,9 @@ def check_combinations(papi_data):
         else:
             dados["brilho"] = "0"
     else:
-        dados["status"] = "Não foi Possível Acessar o PLC"
+        dados["status"] = "Falha Acessar o CLP"
+        dados["brilho"] = -1
+        dados["remoto"] = 0
 
 
 def get_dados():
@@ -64,6 +69,8 @@ def get_dados():
     return dados
 
 
-response = requests.post(
-    'http://localhost:8000/api/managePAPIStatusData', json=get_dados())
-print(response.content)
+response = requests.post('http://10.80.8.54:8000/api/managePAPIStatusData', json=get_dados())
+
+# while(True):
+#    response = requests.post('http://10.80.8.54:8000/api/managePAPIStatusData', json=get_dados())
+#    time.sleep(300)

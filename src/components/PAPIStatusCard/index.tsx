@@ -69,31 +69,6 @@ const PAPIStatusCard: React.FC = () => {
           </div>
         ) : (
           <>
-            {/* <div>
-              <FontAwesomeIcon icon={faCloud} />
-              <i>&nbsp;OPERAÇÃO:</i>
-              <b> {papiInfo?.operacao ? 'Remoto' : 'Local'}</b>
-            </div>
-            <div>
-              <FontAwesomeIcon icon={faLightbulb} />
-              <i>&nbsp;BRILHO:</i>
-              <b> {papiInfo?.brilho}</b>
-            </div>
-            <div>
-              <FontAwesomeIcon icon={faDatabase} />
-              <i>&nbsp;SVR BD:</i>
-              <b> {papiInfo?.database}</b>
-            </div>
-            <div>
-              <FontAwesomeIcon icon={faExclamationCircle} />
-              <i>&nbsp;STATUS:</i>
-              <b> {papiInfo?.status}</b>
-            </div>
-            <div>
-              <FontAwesomeIcon icon={faCalendar} />
-              <i>&nbsp;ATLIZ:</i>
-              <b> {papiInfo?.updated}</b>
-            </div> */}
             <div className="parent">
               <div className="div1">
                 <FontAwesomeIcon icon={faCloud} />
@@ -105,7 +80,11 @@ const PAPIStatusCard: React.FC = () => {
                 {' '}
                 <FontAwesomeIcon icon={faLightbulb} />
                 &nbsp;NÍVEL BRILHO:{' '}
-                {papiInfo?.brilho === 0 ? 'PAPI Desativado' : papiInfo?.brilho}
+                {papiInfo?.brilho === -1
+                  ? 'Falha Acessar o CLP'
+                  : papiInfo?.brilho === 0
+                  ? 'PAPI Desativado'
+                  : papiInfo?.brilho}
               </div>
               <div className="div3">
                 {' '}
@@ -122,7 +101,7 @@ const PAPIStatusCard: React.FC = () => {
               <div className="div5">
                 <FontAwesomeIcon icon={faCalendar} />
                 &nbsp;ULTIMO TESTE:&nbsp;
-                {papiInfo?.updated}{' '}
+                {papiInfo?.updated}
               </div>
             </div>
           </>

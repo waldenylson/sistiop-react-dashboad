@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  python:
+    container_name: PAPI-python
+    image: python
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes:
+      - /home/waldenylson/Projetos/sistiop-react-dashboad:/opt
+#      - /tiop/dados-containers/sistiop-react-dashboad:/opt
