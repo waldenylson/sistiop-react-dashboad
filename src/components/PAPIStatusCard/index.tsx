@@ -101,7 +101,7 @@ const PAPIStatusCard: React.FC = () => {
               <div className="div5">
                 <FontAwesomeIcon icon={faCalendar} />
                 &nbsp;ULTIMO TESTE:&nbsp;
-                {papiInfo?.updated}
+                {papiInfo?.updated}&nbsp;UTC
               </div>
             </div>
           </>
