@@ -17,6 +17,7 @@
     "axios": "^0.27.2",
     "bootswatch": "^5.2.0",
     "date-fns": "^2.29.2",
+    "jquery": "^3.7.1",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-content-loader": "^6.2.0",
@@ -29,10 +30,12 @@
     "stylelint-prettier": "^2.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-inject": "^5.0.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/axios": "^0.14.0",
+    "@types/jquery": "^3.5.30",
     "@types/node": "^18.7.14",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",

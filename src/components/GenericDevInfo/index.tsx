@@ -46,7 +46,7 @@ const GenericDevInfo: React.FC = () => {
       </span>
       <span className="rightSpace">
         <FontAwesomeIcon icon={faCodeBranch} />
-        &nbsp;SISTIOp_2022 (<img src={react} alt="" width={15} height={15} />)
+        &nbsp;SISTIOp_2024.2 (<img src={react} alt="" width={15} height={15} />)
       </span>
     </Container>
   );

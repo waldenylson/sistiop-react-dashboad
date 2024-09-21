@@ -16,8 +16,6 @@ const NotificationsCard: React.FC = () => {
   const rplAlert = useRecoilValue(RPLValidateInfo);
   const cgnaRPL = useRecoilValue(RPLCGNAInfo);
 
-  console.log(cgnaRPL);
-
   return (
     <div className="card border-dark mb-3 center">
       <div className="card-header" style={{ height: 60, fontSize: 27 }}>
@@ -30,21 +28,19 @@ const NotificationsCard: React.FC = () => {
       <Container
         className="card-body"
         style={{
-          height: 300,
+          height: 230,
         }}
       >
         {cgnaRPL === 1 ? (
           <div className="box box-notification-rplCGNA box-notification-height">
             <span className="fa-blink">
-              RPL DISPONÍVEL no Portal do CGNA! <br /> Iniciar Tratamento no
-              SAGITARIO!
+              RPL DISPONÍVEL no Portal do CGNA! <br /> Acionar DO/BDS!
             </span>
           </div>
         ) : cgnaRPL === 2 ? (
           <div className="box box-notification-C-AIS box-notification-height">
             <span>
-              RPL Futuro Iniciado no SAGITARIO! <br /> Aguardando correção do
-              C-AIS!
+              DO/BDS Acionado! <br /> Aguardando correção!
             </span>
           </div>
         ) : cgnaRPL === 3 && !rplAlert ? (

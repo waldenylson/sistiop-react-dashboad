@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 
 interface IDadosEscalaResources {
   escalado: string;
+  celular: string;
   ramal: string;
 }
 
@@ -24,13 +25,13 @@ const WarningCard: React.FC = () => {
   const [sobreaviso, setSobreaviso] = React.useState<ISobreaviso[] | null>();
 
   const escalas = [
-    // 'OFICIAL DE SOBREAVISO TÉCNICO',
+    'OFICIAL DE SOBREAVISO TÉCNICO',
     'SOBREAVISO DA TIAD',
     'SOBREAVISO DA TIOP',
     'SOBREAVISO DA TISI',
-    'SOBREAVISO DE REDES (TTIR)',
+    'SOBREAVISO DE REDES E TELEFONIA (TTIR/TTTF)',
     'SOBREAVISO TÉCNICO AO RADAR',
-    // 'SOBREAVISO DA TIMC',
+    'SOBREAVISO DA TIMC',
     // "TÉCNICO DE DIA À KM",
     // "TÉCNICO DE DIA À SALA TÉCNICA DIURNO",
     // "TÉCNICO DE DIA À SALA TÉCNICA NOTURNO",
@@ -50,7 +51,7 @@ const WarningCard: React.FC = () => {
 
         filteredData.splice(0, 0, filteredData[1]);
         filteredData.splice(2, 1);
-
+        console.log(filteredData);
         setSobreaviso(filteredData);
       });
     },
@@ -96,30 +97,144 @@ const WarningCard: React.FC = () => {
           &nbsp; SOBREAVISO TÉCNICO
         </b>
       </div>
-
       <div className="card-body" style={{ height: 350 }}>
         {isFetching && !sobreaviso ? (
           <GenericContentLoader />
         ) : (
-          sobreaviso?.map((item, index) => (
-            <p
-              className="card-text-content"
-              style={{ fontSize: 25 }}
-              key={item.nome}
+          <>
+            <table
+              className="table table-sm card-header"
+              style={{ width: 450 }}
             >
-              {sobreavisoTiop(new Date().getHours()) && index === 0
-                ? `${item.dadosEscalaResources[0].escalado.slice(
-                    0,
-                    -15,
-                  )} (${parseAgenda(item.dadosEscalaResources[0].ramal)})`
-                : item.dadosEscalaResources[1]
-                ? `${item.dadosEscalaResources[1].escalado.slice(
-                    0,
-                    -15,
-                  )} (${parseAgenda(item.dadosEscalaResources[1].ramal)})`
-                : item.nome + ' S/ Escala'}
-            </p>
-          ))
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col">Escala</th>
+                  <th scope="col">Militar</th>
+                  <th scope="col">Celular</th>
+                  <th scope="col">Agenda</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes('OFICIAL DE SOBREAVISO TÉCNICO') ? (
+                    <tr>
+                      <th scope="row">OST</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">(81)98814-4279</th>
+                      <th scope="row">6812</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes('SOBREAVISO DA TIOP') ? (
+                    <tr>
+                      <th scope="row">TIOp</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].celular}
+                      </th>
+                      <th scope="row">{item.dadosEscalaResources[1].ramal}</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes('SOBREAVISO DA TIAD') ? (
+                    <tr>
+                      <th scope="row">TIAd</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].celular}
+                      </th>
+                      <th scope="row">{item.dadosEscalaResources[1].ramal}</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes('SOBREAVISO DA TISI') ? (
+                    <tr>
+                      <th scope="row">TISI</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].celular}
+                      </th>
+                      <th scope="row">{item.dadosEscalaResources[1].ramal}</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes('SOBREAVISO DA TIMC') ? (
+                    <tr>
+                      <th scope="row">TIMC</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].celular}
+                      </th>
+                      <th scope="row">{item.dadosEscalaResources[1].ramal}</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes(
+                    'SOBREAVISO DE REDES E TELEFONIA (TTIR/TTTF)',
+                  ) ? (
+                    <tr>
+                      <th scope="row">TTIR/TTTF</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].celular}
+                      </th>
+                      <th scope="row">{item.dadosEscalaResources[1].ramal}</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+
+                {sobreaviso?.map((item, _index) =>
+                  item.nome.includes('SOBREAVISO TÉCNICO AO RADAR') ? (
+                    <tr>
+                      <th scope="row">TREe</th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].escalado.slice(0, -22)}
+                      </th>
+                      <th scope="row">
+                        {item.dadosEscalaResources[1].celular}
+                      </th>
+                      <th scope="row">{item.dadosEscalaResources[1].ramal}</th>
+                    </tr>
+                  ) : (
+                    ''
+                  ),
+                )}
+              </tbody>
+            </table>
+          </>
         )}
       </div>
     </div>

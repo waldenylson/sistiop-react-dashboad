@@ -6,7 +6,6 @@ import MaintenanceCard from '../../components/Maintenance';
 import NotificationsCard from '../../components/NotificationsCard';
 import RPLCard from '../../components/RPLCard';
 import GenericDevInfo from '../../components/GenericDevInfo';
-import COPMSGDBackupCard from '../../components/COPMSGDBackupCard';
 import PAPIStatusCard from '../../components/PAPIStatusCard';
 
 const Dashboard: React.FC = () => {
@@ -16,7 +15,7 @@ const Dashboard: React.FC = () => {
         style={{
           width: '25%',
           margin: 2,
-          alignContent: 'center',
+          alignContent: 'stretch',
           border: '1px solid #fff',
           borderRadius: 5,
         }}
@@ -29,7 +28,7 @@ const Dashboard: React.FC = () => {
         style={{
           width: '1150px',
           margin: 2,
-          alignContent: 'center',
+          alignContent: 'stretch',
           border: '1px solid #fff',
           display: 'flex',
           flexDirection: 'column',
@@ -43,14 +42,13 @@ const Dashboard: React.FC = () => {
         style={{
           width: '290px',
           margin: 2,
-          alignContent: 'center',
-          border: '1px solid #fff',
+          alignContent: 'stretch',
           borderRadius: 5,
+          border: '1px solid #fff',
         }}
       >
         <SystemInfoCard />
         <RPLCard />
-        <COPMSGDBackupCard />
       </div>
     </>
   );

@@ -1,14 +1,6 @@
 import React from 'react';
 
-import {
-  faDesktop,
-  faCode,
-  faInfoCircle,
-  faCalendar,
-  faDatabase,
-} from '@fortawesome/free-solid-svg-icons';
-
-import { format } from 'date-fns';
+import { faDesktop } from '@fortawesome/free-solid-svg-icons';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -34,6 +26,7 @@ const SystemInfoCard: React.FC = () => {
     ['InfSis'],
     async () => {
       await api.get('/api/getInfSis').then(response => {
+        console.log(response.data);
         setInfSis(response.data);
       });
     },
@@ -65,20 +58,20 @@ const SystemInfoCard: React.FC = () => {
 
             <span className="badge bg-dark span-badge-name-titles">ACC-AO</span>
             <SystemInfoDetail
-              index={3}
+              index={1}
               isFetching={isFetching}
               infSis={infSis}
             />
             <span className="badge bg-dark span-badge-name-titles">APP-RF</span>
             <SystemInfoDetail
-              index={1}
+              index={2}
               isFetching={isFetching}
               infSis={infSis}
             />
 
             <span className="badge bg-dark span-badge-name-titles">COPM3</span>
             <SystemInfoDetail
-              index={2}
+              index={3}
               isFetching={isFetching}
               infSis={infSis}
             />
