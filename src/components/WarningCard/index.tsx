@@ -44,7 +44,8 @@ const WarningCard: React.FC = () => {
         const responseData: ISobreaviso[] = response.data;
 
         const filteredData = responseData?.filter(item =>
-          item.dadosEscalaResources.length === 0
+          item.dadosEscalaResources.length === 0 ||
+          item.dadosEscalaResources.length < 3
             ? ''
             : escalas.includes(item.nome),
         );
